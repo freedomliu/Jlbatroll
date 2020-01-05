@@ -2,7 +2,6 @@ package com.freedom.jlbatross.service;
 
 import com.freedom.jlbatross.config.netty.ChannelSupervise;
 import com.freedom.jlbatross.config.netty.WebSocketServer;
-import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import org.apache.maven.shared.invoker.DefaultInvocationRequest;
 import org.apache.maven.shared.invoker.DefaultInvoker;
 import org.apache.maven.shared.invoker.InvocationRequest;
@@ -36,17 +35,17 @@ public class JlbatrollService {
         DefaultInvoker invoker = new DefaultInvoker();
         invoker.setMavenHome(new java.io.File("D:/workspace/apache-maven-3.3.3"));
         try {
-            ChannelSupervise.send2All(new TextWebSocketFrame("----开始打包----"));
+            ChannelSupervise.send2All("----开始打包----");
             invoker.execute( request );
         }
         catch (MavenInvocationException e) {
-            ChannelSupervise.send2All(new TextWebSocketFrame("----系统异常----"));
+            ChannelSupervise.send2All("----系统异常----");
             e.printStackTrace();
-            ChannelSupervise.send2All(new TextWebSocketFrame(e.getMessage()));
+            ChannelSupervise.send2All(e.getMessage());
         }
 
         System.setOut(oldPrintStream); //恢复原来的System.out
-        ChannelSupervise.send2All(new TextWebSocketFrame(bos.toString()));
-        ChannelSupervise.send2All(new TextWebSocketFrame("----打包完成----"));
+        ChannelSupervise.send2All(bos.toString());
+        ChannelSupervise.send2All("----打包完成----");
     }
 }

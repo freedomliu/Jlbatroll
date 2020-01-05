@@ -1,9 +1,8 @@
 package com.freedom.jlbatross.controller;
 
-import com.freedom.jlbatross.config.netty.ChannelSupervise;
 import com.freedom.jlbatross.config.netty.WebSocketServer;
+import com.freedom.jlbatross.service.DeployService;
 import com.freedom.jlbatross.service.JlbatrollService;
-import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +22,9 @@ public class JlbatrollController {
     @Autowired
     JlbatrollService jlbatrollService;
 
+    @Autowired
+    DeployService ganymedService;
+
     @GetMapping("/")
     public ModelAndView console(ModelAndView modelAndView) {
         modelAndView.setViewName("console");
@@ -34,9 +36,8 @@ public class JlbatrollController {
         jlbatrollService.install();
     }
 
-    @GetMapping("sendMst")
+    @GetMapping("deploy")
     public void sendMst(ModelAndView modelAndView) {
-        TextWebSocketFrame textWebSocketFrame = new TextWebSocketFrame("sdfdsf 的方法对方");
-        ChannelSupervise.send2All(textWebSocketFrame);
+        ganymedService.deploy();
     }
 }

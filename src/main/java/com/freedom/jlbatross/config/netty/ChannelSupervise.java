@@ -7,6 +7,7 @@ import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
+import java.time.LocalDateTime;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -33,7 +34,7 @@ public class ChannelSupervise {
         return GlobalGroup.find(ChannelMap.get(id));
     }
 
-    public static void send2All(TextWebSocketFrame tws) {
-        GlobalGroup.writeAndFlush(tws);
+    public static void send2All(String tws) {
+        GlobalGroup.writeAndFlush(new TextWebSocketFrame(LocalDateTime.now() + "  :" + tws));
     }
 }
