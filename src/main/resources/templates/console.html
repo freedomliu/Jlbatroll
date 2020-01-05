@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Jlbatroll</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+</head>
+<style type="text/css">
+.max-h{height: 100%}
+</style>
+<body style="background-color: #F2F2F2;">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header header header-demo" winter1="">
+        <div class="layui-main">
+            <ul class="layui-nav">
+                <li class="layui-nav-item ">
+                    <a href="javascript:;"><span style="font-size: 40px">Jlbatroll</span></a>
+                </li>
+                <span class="layui-nav-bar"></span></ul>
+        </div>
+    </div>
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+
+            <ul class="layui-nav layui-nav-tree site-demo-nav">
+
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="javascript:;" href="javascript:;">项目<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="/demo/">调试预览</a>
+                        </dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item" style="height: 30px; text-align: center"></li>
+                <span class="layui-nav-bar" style="top: 232.5px; height: 0px; opacity: 0;"></span></ul>
+        </div>
+    </div>
+
+    <div class="layui-body site-demo max-h">
+
+        <div style="padding: 20px; background-color: #F2F2F2; width: 100%; height: 100%">
+            <div class="layui-row layui-col-space15 max-h">
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">系统配置</div>
+                        <div class="layui-card-body">
+                                <form class="layui-form" action="">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">maven目录</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="D:/**/apache-maven-3.3.3" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-input-block">
+                                            <button type="submit" class="layui-btn layui-btn-primary">保存</button>
+                                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                            <button type="button" class="layui-btn layui-btn-primary">清空节点</button>
+                                            <button type="button" class="layui-btn layui-btn-primary">添加节点</button>
+                                            <button type="button" class="layui-btn layui-btn-primary">批量部署</button>
+                                        </div>
+                                    </div>
+                                </form>
+                        </div>
+                    </div>
+                    <div class="layui-card">
+                        <div class="layui-card-header">节点配置</div>
+                        <div class="layui-card-body">
+                                <form class="layui-form" action="">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">pom目录</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="D:/**/pom.xml" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">目标目录</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">远程账号</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">远程密码</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">端口</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">启用</label>
+                                        <div class="layui-input-block">
+                                            <input type="checkbox" name="" title="开启">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-input-block">
+                                            <button type="submit" class="layui-btn layui-btn-primary">保存</button>
+                                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                            <button type="reset" class="layui-btn layui-btn-primary">一键部署</button>
+                                        </div>
+                                    </div>
+                                </form>
+                        </div>
+                    </div>
+
+                    <div class="layui-card">
+                        <div class="layui-card-header">节点配置</div>
+                        <div class="layui-card-body">
+                            <form class="layui-form" action="">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">pom目录</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="D:/**/pom.xml" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">目标目录</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">远程账号</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">远程密码</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">端口</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">启用</label>
+                                    <div class="layui-input-block">
+                                        <input type="checkbox" name="" title="开启">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button type="submit" class="layui-btn layui-btn-primary">保存</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary">一键部署</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6 max-h">
+                    <div class="layui-card max-h">
+                        <div class="layui-card-header">控制台</div>
+                        <div id="console" class="layui-card-body layui-side-scroll" style="width: 100%;">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="layui/layui.js" charset="utf-8"></script>
+<script src="jquery-3.3.1.min.js" charset="utf-8"></script>
+
+<script>
+    var socket;
+    if(!window.WebSocket){
+        window.WebSocket = window.MozWebSocket;
+    }
+
+    if(window.WebSocket){
+        socket = new WebSocket("ws://localhost:8081");
+        socket.onmessage = function(event) {
+            var data = event.data;
+            $("#console").prepend(data + "<br>");
+            debugger;
+        }
+        socket.onopen = function (ev) {
+            debugger;
+        }
+        socket.onopen = function (ev) {
+            debugger;
+        }
+    }
+
+    function send(message) {
+        socket.send(message);
+    }
+
+    layui.use(['element','form'], function(){
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+        var form = layui.form;
+        //监听导航点击
+        element.on('nav(demo)', function(elem){
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+    });
+</script>
+
+</body>
+</html>

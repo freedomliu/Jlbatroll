@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- debug当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。-->
+<configuration debug="false">
+
+    <!-- 业务日志 -->
+    <appender name="APP_INFO_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>D:data/log/demo_monitor_%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <!--<encoder class="com.test.query.feign.rewrite.PatternLayoutEncoderReWrite">-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <!--<pattern>%msg</pattern>-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--异常日志-->
+    <appender name="APP_ERROR_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>D:data/log/demo_monitor_error.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>D:data/log/demo_monitor_error_%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <!--<encoder class="com.test.query.feign.rewrite.PatternLayoutEncoderReWrite">-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <!--<pattern>%msg</pattern>-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} %line - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 只记录sql日志 -->
+    <appender name="SQL_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>D:data/log/demo_monitor_sql_%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--<FileNamePattern>C:/logs/log.@build.finalName@.%d{yyyy-MM-dd}.log</FileNamePattern>-->
+            <!--日志文件保留天数-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <!--<encoder class="com.test.query.feign.rewrite.PatternLayoutEncoderReWrite">-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <!--<pattern>%msg</pattern>-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--logger节点：用来设置一个类或者一个包下面的类的打印-->
+    <!--name:用来指定受此loger约束的某一个包或者具体的某一个类。-->
+    <!--level:用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF-->
+    <!--addtivity:是否向上级loger传递打印信息。默认是true。-->
+    <!--只记录SQL。在已准备好的语句中执行的SQL将自动显示，其绑定参数替换为该位置绑定的数据，从而大大提高了可读性。-->
+    <logger name="jdbc.sqlonly" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="SQL_LOG"/>
+    </logger>
+
+    <!--对ResultSet对象的所有调用都被记录在日志中-->
+    <logger name="jdbc.resultset" level="ERROR" additivity="false">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="SQL_LOG"/>
+        <appender-ref ref="APP_ERROR_LOG"/>
+    </logger>
+
+    <!--记录连接打开和关闭事件以及转储所有打开的连接编号。这对于查找连接泄漏问题非常有用。-->
+    <logger name="jdbc.connection1" level="OFF" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <!--执行时间的统计-->
+    <logger name="jdbc.sqltiming" level="OFF" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <!--全日志的JDBC调用的方法包括resultsets。。。。。。。这是一个非常voluminous产出，
+    是不需要normally除非跟踪下一JDBC的特异性的问题。-->
+    <logger name="jdbc.audit" level="OFF" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com.example" level="ERROR" additivity="false">
+        <appender-ref ref="APP_ERROR_LOG"/>
+    </logger>
+
+    <logger name="com" level="INFO" additivity="false">
+        <appender-ref ref="APP_ERROR_LOG"/>
+    </logger>
+
+    <logger name="org" level="INFO" additivity="false">
+        <appender-ref ref="APP_ERROR_LOG"/>
+    </logger>
+
+    <!--指定业务日志包范围-->
+    <logger name="com.example" level="INFO" additivity="false">
+        <appender-ref ref="APP_INFO_LOG"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="com" level="INFO" additivity="false">
+        <appender-ref ref="APP_INFO_LOG"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org" level="INFO" additivity="false">
+        <appender-ref ref="APP_INFO_LOG"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <!-- 日志输出级别 -->
+    <!--root节点：和logger功能类似，但是相当于*所有类都打印-->
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>
