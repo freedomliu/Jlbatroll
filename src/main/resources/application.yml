@@ -4,10 +4,27 @@ server:
 spring:
   application:
     name: jlbatross
+  datasource:
+    url: jdbc:sqlite::resource:db/jlbatross.db
+    driver-class-name: org.sqlite.JDBC
+    username:
+    password:
   mvc:
     view:
       suffix: .html
     static-path-pattern: /**
   resources:
     static-locations: classpath:templates/,classpath:/static/
+
+  freemarker:
+    cache: false
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    expose-request-attributes: true
+    expose-session-attributes: true
+    request-context-attribute: request
+    suffix: .html
+    settings.number_format: 0.##
+    allowSessionOverride: true
 
