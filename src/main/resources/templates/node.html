@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Jlbatroll</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+</head>
+<style type="text/css">
+    .max-h{height: 100%}
+</style>
+<body style="background-color: #F2F2F2;">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header header header-demo" winter1="">
+        <div class="layui-main">
+            <ul class="layui-nav">
+                <li class="layui-nav-item ">
+                    <a href="javascript:;"><span style="font-size: 40px">Jlbatroll</span></a>
+                </li>
+                <span class="layui-nav-bar"></span></ul>
+        </div>
+    </div>
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+
+            <ul class="layui-nav layui-nav-tree site-demo-nav">
+
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="javascript:;" href="javascript:;">目录<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="/systemConfig">系统配置</a>
+                        </dd>
+                    </dl>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="/demo/">节点配置</a>
+                        </dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item" style="height: 30px; text-align: center"></li>
+                <span class="layui-nav-bar" style="top: 232.5px; height: 0px; opacity: 0;"></span></ul>
+        </div>
+    </div>
+
+    <div class="layui-body site-demo max-h">
+
+        <div style="padding: 20px; background-color: #F2F2F2; width: 97%; height: 100%">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-card">
+                    <div class="layui-card-header">节点配置</div>
+                    <div class="layui-card-body">
+                        <table lay-filter="myTable" id="myTable" class="layui-hide">
+
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script type="text/html" id="toolbar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="">添加</button>
+    </div>
+</script>
+
+<script src="layui/layui.js" charset="utf-8"></script>
+<script src="jquery-3.3.1.min.js" charset="utf-8"></script>
+
+<script>
+    layui.use(['element','form','table'], function(){
+        var element = layui.element,
+            table=layui.table;
+
+        table.render({
+            id: 'myTable'
+            ,elem: '#myTable'
+            ,toolbar: '#toolbar'
+            ,defaultToolbar:[]
+            ,url: '${request.contextPath}/node/list' //数据接口
+            ,page: true //开启分页
+            ,cols: [[ //表头
+                {type: 'numbers'}
+                ,{field: 'name', align:'center', title: '名称'}
+                ,{fixed: 'right',field: 'enable', title: '操作', align:'center', toolbar: '#bar',width : 220}
+            ]]
+        });
+
+        //头工具栏事件
+        table.on('toolbar(myTable)', function(obj){
+            window.location.href = "${request.contextPath}/node/item";
+        });
+
+        //监听行工具事件
+        table.on('tool(myTable)', function(obj){
+            debugger
+            var data = obj.data;
+            //console.log(obj)
+            if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    $.ajax({
+                        url: "node/" + obj.data.id,
+                        type: 'DELETE',
+                        success: function(result) {
+                            layer.alert(result.msg);
+                           debugger
+                            searchList();
+                        }
+                    });
+                    layer.closeAll();
+                });
+            } else if(obj.event === 'detail'){
+                window.location.href="";
+            }
+        });
+    });
+
+    function searchList()
+    {
+        layui.table.reload('myTable',{
+            page: {
+                curr: 1 //重新从第 1 页开始
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

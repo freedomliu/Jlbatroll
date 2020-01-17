@@ -69,11 +69,11 @@ public class JSONResult {
         return new JSONResult(555, msg, null);
     }
 
-    public static JSONResult updateResult(int count, String msg) {
+    public static JSONResult updateResult(int count) {
         if(count == 0) {
-            return JSONResult.ok(msg);
+            return JSONResult.ok("操作成功");
         } else {
-            return JSONResult.errorMsg(msg);
+            return JSONResult.errorMsg("操作失败");
         }
     }
 

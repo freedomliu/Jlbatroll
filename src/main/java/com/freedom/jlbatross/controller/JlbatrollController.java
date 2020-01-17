@@ -27,7 +27,7 @@ public class JlbatrollController {
 
     @GetMapping("/")
     public ModelAndView console(ModelAndView modelAndView) {
-        modelAndView.setViewName("console");
+        modelAndView.setViewName("node");
         return modelAndView;
     }
 

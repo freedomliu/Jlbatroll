@@ -1,20 +1,16 @@
 package com.freedom.jlbatross.mapper;
 
-import com.freedom.jlbatross.entity.Node;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.freedom.jlbatross.entity.NodeItem;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 /**
- * <p>
- *  Mapper 接口
- * </p>
- *
- * @author liuxiangtao90
- * @since 2020-01-17
+ * @Auther: liuxiangtao90
+ * @Date: 2020/1/16 14:14
+ * @Description:
  */
 @Mapper
 @Repository
-public interface NodeMapper extends BaseMapper<Node> {
-
+public interface NodeItemMapper extends BaseMapper<NodeItem> {
 }

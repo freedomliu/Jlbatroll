@@ -31,14 +31,15 @@ public class SystemConfigController {
     @PostMapping("sysConfig")
     @ResponseBody
     public JSONResult insertConfig(SystemConfig config) {
-        int insert = systemConfigMapper.insert(config);
-        return JSONResult.updateResult(insert, "操作成功");
+        config.setId(1);
+        int insert = systemConfigMapper.updateById(config);
+        return JSONResult.updateResult(insert);
     }
 
     @PutMapping("sysConfig")
     @ResponseBody
     public JSONResult updateConfig(SystemConfig config) {
         int updateCount = systemConfigMapper.updateById(config);
-        return JSONResult.updateResult(updateCount, "操作成功");
+        return JSONResult.updateResult(updateCount);
     }
 }

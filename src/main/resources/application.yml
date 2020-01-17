@@ -1,6 +1,11 @@
 server:
   port: 8080
 
+# 配置slq打印日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
 spring:
   application:
     name: jlbatross
@@ -27,4 +32,3 @@ spring:
     suffix: .html
     settings.number_format: 0.##
     allowSessionOverride: true
-
